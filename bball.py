@@ -70,15 +70,6 @@ class Baseball:
         self.count -= 1
         return self.count
 
-    def left_count(self):
-        return self.count
-
-    def length(self):
-        return self.length
-
-    def number(self):
-        return self.number
-
     def get_strike(self, result):
         c = 0
         for index in range(0, self.length):
@@ -122,9 +113,10 @@ def Main():
     bb = Baseball(value)
 
     while True:
-        left = bb.left_count()
+        left = bb.count
         if left <= 0:
-            print "Game Over!"
+            n = bb.number
+            print "Game Over! %s" % str(n)
             exit()
 
         print "Left count = ", left

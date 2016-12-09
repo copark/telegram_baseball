@@ -120,12 +120,13 @@ def cmd_game(chat_id, gs, text):
         return
 
     if  bb.decrease() <= 0:
-        send_msg(chat_id, "Number is %s. plz /start to play again." % bb.number())
         gs.baseball = str(bb)
         gs.put()
+        msg = "Number is %s. Plz /start to play again." % bb.number
+        send_msg(chat_id, msg)
         return
 
-    send_msg(chat_id, "%d Strike(s), %d Ball(s). You left %d time(s)." % (s, b, bb.left_count()))
+    send_msg(chat_id, "%d Strike(s), %d Ball(s). You left %d time(s)." % (s, b, bb.count))
     gs.baseball = str(bb)
     gs.put()
 
@@ -143,6 +144,9 @@ def process_cmds(msg):
 
     gs = get_game(chat_id)
     if (not gs):
+        return
+
+    if (gs.enabled == False):
         return
 
     if CMD_STOP == text:
